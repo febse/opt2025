@@ -1,0 +1,1231 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="bg" xml:lang="bg"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.4.555">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+
+<title>Въведение в математическата оптимизация - 2&nbsp; Графичен метод</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+/* CSS for syntax highlighting */
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+</style>
+
+
+<script src="../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../site_libs/quarto-nav/headroom.min.js"></script>
+<script src="../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="../site_libs/quarto-search/fuse.min.js"></script>
+<script src="../site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="../">
+<link href="../03-Graphical-Method/02-Sensitivity.html" rel="next">
+<link href="../02-Introduction/index.html" rel="prev">
+<script src="../site_libs/quarto-html/quarto.js"></script>
+<script src="../site_libs/quarto-html/popper.min.js"></script>
+<script src="../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
+<script id="quarto-search-options" type="application/json">{
+  "location": "sidebar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "start",
+  "type": "textbox",
+  "limit": 50,
+  "keyboard-shortcut": [
+    "f",
+    "/",
+    "s"
+  ],
+  "show-item-context": false,
+  "language": {
+    "search-no-results-text": "Няма намерени резултати",
+    "search-matching-documents-text": "съвпадащи документи",
+    "search-copy-link-title": "Копирай връзката в полето за търсене",
+    "search-hide-matches-text": "Скрий допълнителните съвпадения",
+    "search-more-match-text": "допълнително съвпадение в документа",
+    "search-more-matches-text": "допълнителни съвпадения в документа",
+    "search-clear-button-title": "Изчисти",
+    "search-text-placeholder": "",
+    "search-detached-cancel-button-title": "Отмени",
+    "search-submit-button-title": "Изпрати",
+    "search-label": "Търси"
+  }
+}</script>
+
+  <script>window.backupDefine = window.define; window.define = undefined;</script><script src="https://cdn.jsdelivr.net/npm/katex@0.15.1/dist/katex.min.js"></script>
+  <script>document.addEventListener("DOMContentLoaded", function () {
+ var mathElements = document.getElementsByClassName("math");
+ var macros = [];
+ for (var i = 0; i < mathElements.length; i++) {
+  var texText = mathElements[i].firstChild;
+  if (mathElements[i].tagName == "SPAN") {
+   katex.render(texText.data, mathElements[i], {
+    displayMode: mathElements[i].classList.contains('display'),
+    throwOnError: false,
+    macros: macros,
+    fleqn: false
+   });
+}}});
+  </script>
+  <script>window.define = window.backupDefine; window.backupDefine = undefined;</script><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.15.1/dist/katex.min.css">
+
+<script type="text/javascript">
+const typesetMath = (el) => {
+  if (window.MathJax) {
+    // MathJax Typeset
+    window.MathJax.typeset([el]);
+  } else if (window.katex) {
+    // KaTeX Render
+    var mathElements = el.getElementsByClassName("math");
+    var macros = [];
+    for (var i = 0; i < mathElements.length; i++) {
+      var texText = mathElements[i].firstChild;
+      if (mathElements[i].tagName == "SPAN") {
+        window.katex.render(texText.data, mathElements[i], {
+          displayMode: mathElements[i].classList.contains('display'),
+          throwOnError: false,
+          macros: macros,
+          fleqn: false
+        });
+      }
+    }
+  }
+}
+window.Quarto = {
+  typesetMath
+};
+</script>
+
+</head>
+
+<body class="nav-sidebar floating">
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+  <nav class="quarto-secondary-nav">
+    <div class="container-fluid d-flex">
+      <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Включи/скрий страничната навигация" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+        <i class="bi bi-layout-text-sidebar-reverse"></i>
+      </button>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../03-Graphical-Method/01-Blending.html"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Графичен метод</span></a></li></ol></nav>
+        <a class="flex-grow-1" role="button" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Включи/скрий страничната навигация" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
+        </a>
+      <button type="button" class="btn quarto-search-button" aria-label="" onclick="window.quartoOpenSearch();">
+        <i class="bi bi-search"></i>
+      </button>
+    </div>
+  </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article">
+<!-- sidebar -->
+  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation floating overflow-auto">
+    <div class="pt-lg-2 mt-2 text-left sidebar-header">
+    <div class="sidebar-title mb-0 py-0">
+      <a href="../">Въведение в математическата оптимизация</a> 
+    </div>
+      </div>
+        <div class="mt-2 flex-shrink-0 align-items-center">
+        <div class="sidebar-search">
+        <div id="quarto-search" class="" title="Търси"></div>
+        </div>
+        </div>
+    <div class="sidebar-menu-container"> 
+    <ul class="list-unstyled mt-1">
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Setup</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../02-Introduction/index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">Въведение</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../03-Graphical-Method/01-Blending.html" class="sidebar-item-text sidebar-link active">
+ <span class="menu-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Графичен метод</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../03-Graphical-Method/02-Sensitivity.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Анализ на чувствителността на решението</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../04-Simplex/01-Canonical-Representation.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Каноничен вид на задачата за линейно програмиране</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../04-Simplex/02-Simplex-Method.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Симплекс алгоритъм</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../05-Duals/01-Duals.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Дуални задачи</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../05-Duals/02-Sensitivity.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Анализ на чувствителността (2)</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../06-Transportation.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Транспортна задача</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../00-Assignments/assignments.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">Задачи</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../Literature.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Литература</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../izpit.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">Изпит</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../references.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Библиография</span></a>
+  </div>
+</li>
+    </ul>
+    </div>
+</nav>
+<div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">Съдържание</h2>
+   
+  <ul>
+  <li><a href="#задача-планиране-на-производство" id="toc-задача-планиране-на-производство" class="nav-link active" data-scroll-target="#задача-планиране-на-производство"><span class="header-section-number">2.1</span> Задача: планиране на производство</a></li>
+  <li><a href="#допустимо-множество" id="toc-допустимо-множество" class="nav-link" data-scroll-target="#допустимо-множество"><span class="header-section-number">2.2</span> Допустимо множество</a></li>
+  <li><a href="#целева-функция-и-оптимален-план" id="toc-целева-функция-и-оптимален-план" class="nav-link" data-scroll-target="#целева-функция-и-оптимален-план"><span class="header-section-number">2.3</span> Целева функция и оптимален план</a></li>
+  <li><a href="#нормален-вектор" id="toc-нормален-вектор" class="nav-link" data-scroll-target="#нормален-вектор"><span class="header-section-number">2.4</span> Нормален вектор</a></li>
+  </ul>
+</nav>
+    </div>
+<!-- main -->
+<main class="content" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default">
+<div class="quarto-title">
+<h1 class="title"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Графичен метод</span></h1>
+</div>
+
+
+
+<div class="quarto-title-meta">
+
+    
+  
+    
+  </div>
+  
+
+
+</header>
+
+
+<section id="задача-планиране-на-производство" class="level2" data-number="2.1">
+<h2 data-number="2.1" class="anchored" data-anchor-id="задача-планиране-на-производство"><span class="header-section-number">2.1</span> Задача: планиране на производство</h2>
+<p>Бутиково кафене в София предлага два продукта: Супер еспресо и Делукс еспресо. За приготвянето на един килограм от първия вид еспресо са необходими по равни части арабика и робуста, а рецептата за Делукс предвижда смес от арабика и робуста в пропорция 1 към 3. Доставчиците са готови да осигурят 120 кг арабика и 160 кг. робуста. Заведението знае, че няма да може да продаде повече от 150 кг. Делукс еспресо. От всеки продаден килограм Супер еспресо заведението печели 40 лв., докато печалбата от килограм Делукс възлиза на 50 лв.</p>
+<p>Колко от двата типа кафе ще препоръчате на кафенето да смеси?</p>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-1-contents" aria-controls="callout-1" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Математически модел
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-1" class="callout-1-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p>Целеви променливи:</p>
+<p><span class="math display">
+\begin{align*}
+&amp; x_1: \text{ Супер еспресо (кг.)}\\
+&amp; x_2: \text{ Делукс еспресо (кг.)}
+\end{align*}
+</span></p>
+<p><span class="math display">
+\max z = 40 x_1 + 50 x_2 \text{ (целева функция)}
+</span></p>
+<p><span class="math display">
+\begin{align*}
+0.5 x_1 + 0.25 x_2 &amp; \leq 120 \text{ (арабика)}\\
+0.5 x_1 + 0.75 x_2 &amp; \leq 160 \text{ (робуста)} \\
+0 \cdot x_1 + x_2 &amp; \leq 150 \text{ (търсене Делукс)}\\
+x_1 &amp; \geq 0 \\
+x_2 &amp; \geq 0
+\end{align*}
+</span></p>
+</div>
+</div>
+</div>
+</section>
+<section id="допустимо-множество" class="level2" data-number="2.2">
+<h2 data-number="2.2" class="anchored" data-anchor-id="допустимо-множество"><span class="header-section-number">2.2</span> Допустимо множество</h2>
+<p>Както и в предишната задача ще изобразим графично допустимото множество, като начертаем правите, към всяко от петте неравенства:</p>
+<p><span class="math display">
+\begin{align}
+0.5 x_1 &amp; + 0.25 x_2 &amp; = &amp; 120 \\
+0.5 x_1 &amp; + 0.75 x_2 &amp; = &amp; 160 \\
+0 \cdot x_1 &amp; + x_2 &amp; = &amp; 150
+\end{align}
+</span></p>
+<p>Първо ще пресметнем пресечните точки на трите прави с осите <span class="math inline">x_1</span> и <span class="math inline">x_2</span>?</p>
+<ul>
+<li>Права арабика: (0, 120 / 0.25 = 480), (120 / 0.5 = 240, 0)</li>
+<li>Права робуста: (0, 160 / 0.75), (160 / 0.5, 0)</li>
+<li>Права търсене на Делукс: (0, 150), (100, 150) Тази права е успоредна на оста <span class="math inline">x_1</span>.</li>
+</ul>
+<div id="cell-fig-coffее-restr" class="cell" data-execution_count="8">
+<details class="code-fold">
+<summary>Покажи</summary>
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> matplotlib.pyplot <span class="im">as</span> plt</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> IPython.display <span class="im">import</span> display</span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a>fig, ax <span class="op">=</span> plt.subplots()</span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a>ax.plot([<span class="dv">0</span>, <span class="dv">240</span>], [<span class="dv">480</span>, <span class="dv">0</span>], label<span class="op">=</span><span class="vs">r"$0.5 x_1 + 0.25 x_2 = 120$ (арабика)"</span>)</span>
+<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a>ax.plot([<span class="dv">0</span>, <span class="dv">320</span>], [<span class="fl">213.33</span>, <span class="dv">0</span>], label<span class="op">=</span><span class="vs">r"$0.5 x_1 + 0.75 x_2 = 160$ (робуста)"</span>)</span>
+<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a>ax.plot([<span class="dv">0</span>, <span class="dv">400</span>], [<span class="dv">150</span>, <span class="dv">150</span>], label<span class="op">=</span><span class="vs">r"$x_2 = 150$ (търсене на Делукс)"</span>)</span>
+<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a>ax.set_xlim((<span class="dv">0</span>, <span class="dv">400</span>))</span>
+<span id="cb1-12"><a href="#cb1-12" aria-hidden="true" tabindex="-1"></a>ax.set_ylim((<span class="dv">0</span>, <span class="dv">500</span>))</span>
+<span id="cb1-13"><a href="#cb1-13" aria-hidden="true" tabindex="-1"></a>ax.set_xlabel(<span class="vs">r'$x_1$ (Супер, кг.)'</span>)</span>
+<span id="cb1-14"><a href="#cb1-14" aria-hidden="true" tabindex="-1"></a>ax.set_ylabel(<span class="vs">r'$x_2$ (Делукс, кг.)'</span>)</span>
+<span id="cb1-15"><a href="#cb1-15" aria-hidden="true" tabindex="-1"></a>ax.legend(loc<span class="op">=</span><span class="dv">0</span>)</span></code><button title="Копирай" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-display">
+<div id="fig-coffее-restr" class="quarto-figure quarto-figure-center quarto-float anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-coffее-restr-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="01-Blending_files/figure-html/fig-coff-restr-output-1.png" class="img-fluid figure-img">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-coffее-restr-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Фигура&nbsp;2.1: Прави на трите ограничения
+</figcaption>
+</figure>
+</div>
+</div>
+</div>
+<p>Допустимото множество е определено от всички точки, които едновременно изпълняват всички ограничения. На <a href="#fig-coffее-restr" class="quarto-xref">Фигура&nbsp;<span>2.1</span></a> това е полигонът определен от</p>
+<ol type="1">
+<li>Пресечната точка на равенствата на двете ограничения за неотрицателност: (0, 0)</li>
+<li>Пресечната точка на неотрицателността на “Супер еспресо” (оста <span class="math inline">x_1</span>) и “арабика”: (240, 0).</li>
+<li>Пресечната точка на равенствата на ограниченията “арабика” и “робуста”</li>
+<li>Пресечната точка на равенствата на ограниченията “робуста” и “търсене на Делукс”</li>
+<li>Пресечната точка на равенствата на ограниченията “търсене на Делукс” и неотрицателността на Делукс (оста <span class="math inline">x_2</span>). Вече пресметнахме тази точка, когато чертахме правите към ограниченията: (0, 150).</li>
+</ol>
+<p>В пресечната точка на правите към “робуста”/“арабика” са изпълнени и двете равенства едновременно. За да намерим точката трябва да решим система от двете уравнения</p>
+<p><span class="math display">
+\begin{align}
+0.5 x_1 + 0.25 x_2 &amp; = 120 \text{ (1: арабика)} \\
+0.5 x_1 + 0.75 x_2 &amp; = 160 \text{ (2: робуста)}
+\end{align}
+</span></p>
+<p>Един начин да решим системата е да извадим първото уравнение от второто уравнение. Когато го направим получаваме</p>
+<p><span class="math display">
+\begin{align}
+(0.75 - 0.25) x_2 &amp; = 160 - 120 \\
+0.5 x_2 &amp; = 40 \\
+x_2 &amp; = 80
+\end{align}
+</span></p>
+<p>Заместваме с <span class="math inline">x_2 = 80</span> в първото уравнение и получаваме</p>
+<p><span class="math display">
+\begin{align}
+0.5 x_1 + 0.25 \cdot 80 &amp; = 120\\
+x_1 &amp; = 200.
+\end{align}
+</span></p>
+<p>Решението на системата е (200, 80): пресечната точка на двете прави.</p>
+<p>За да намерим координатите на пресечната точка на равенствата на “робуста” и “търсене на Делукс” трябва да решим системата от две уравнения принадлежащи към тези ограничения:</p>
+<p><span class="math display">
+\begin{align}
+0.5x_1 + 0.75 x_2 &amp; = &amp; 160 \text{ робуста}\\
+0 x_1 + x_2 &amp; = &amp; 150 \text{ търсене на Делукс}
+\end{align}
+</span></p>
+<p>Решението на системата можем да получим, като заместим в първото уравнение с <span class="math inline">x_2 = 150</span>, за да получим</p>
+<p>С това намерихме координатите на пресечната точка между правите на “робуста” и “търсене на Делукс”: (95, 150).</p>
+<p>Така получаваме върховете на допустимото множество: (0, 0), (240, 0), (200, 80), (95, 150), (0, 150) (<a href="#fig-coffee-feasible-set" class="quarto-xref">Фигура&nbsp;<span>2.2</span></a>).</p>
+<div id="cell-fig-coffee-feasible-set" class="cell" data-execution_count="9">
+<details class="code-fold">
+<summary>Покажи</summary>
+<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>vertices <span class="op">=</span> [</span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>    [<span class="dv">0</span>, <span class="dv">0</span>],</span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>    [<span class="dv">0</span>, <span class="dv">150</span>],</span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>    [<span class="dv">95</span>, <span class="dv">150</span>],</span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a>    [<span class="dv">200</span>, <span class="dv">80</span>],    </span>
+<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a>    [<span class="dv">240</span>, <span class="dv">0</span>]</span>
+<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a>]</span>
+<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a>vertices_x <span class="op">=</span> [v[<span class="dv">0</span>] <span class="cf">for</span> v <span class="kw">in</span> vertices]</span>
+<span id="cb2-10"><a href="#cb2-10" aria-hidden="true" tabindex="-1"></a>vertices_y <span class="op">=</span> [v[<span class="dv">1</span>] <span class="cf">for</span> v <span class="kw">in</span> vertices]</span>
+<span id="cb2-11"><a href="#cb2-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-12"><a href="#cb2-12" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> v <span class="kw">in</span> vertices:</span>
+<span id="cb2-13"><a href="#cb2-13" aria-hidden="true" tabindex="-1"></a>    ax.annotate(</span>
+<span id="cb2-14"><a href="#cb2-14" aria-hidden="true" tabindex="-1"></a>        <span class="ss">f"(</span><span class="sc">{</span>v[<span class="dv">0</span>]<span class="sc">}</span><span class="ss">, </span><span class="sc">{</span>v[<span class="dv">1</span>]<span class="sc">}</span><span class="ss">)"</span>,</span>
+<span id="cb2-15"><a href="#cb2-15" aria-hidden="true" tabindex="-1"></a>        (v[<span class="dv">0</span>], v[<span class="dv">1</span>]),</span>
+<span id="cb2-16"><a href="#cb2-16" aria-hidden="true" tabindex="-1"></a>        textcoords<span class="op">=</span><span class="st">"offset points"</span>,</span>
+<span id="cb2-17"><a href="#cb2-17" aria-hidden="true" tabindex="-1"></a>        xytext<span class="op">=</span>(<span class="dv">0</span>, <span class="dv">5</span>)</span>
+<span id="cb2-18"><a href="#cb2-18" aria-hidden="true" tabindex="-1"></a>    )</span>
+<span id="cb2-19"><a href="#cb2-19" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-20"><a href="#cb2-20" aria-hidden="true" tabindex="-1"></a>ax.fill(vertices_x, vertices_y, color<span class="op">=</span><span class="st">'grey'</span>, alpha<span class="op">=</span><span class="fl">0.3</span>)</span>
+<span id="cb2-21"><a href="#cb2-21" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-22"><a href="#cb2-22" aria-hidden="true" tabindex="-1"></a>display(fig)</span></code><button title="Копирай" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-display">
+<div id="fig-coffee-feasible-set" class="quarto-figure quarto-figure-center quarto-float anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-coffee-feasible-set-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="01-Blending_files/figure-html/fig-coffee-feasible-set-output-1.png" class="img-fluid figure-img">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-coffee-feasible-set-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Фигура&nbsp;2.2: Допустимо множество
+</figcaption>
+</figure>
+</div>
+</div>
+</div>
+</section>
+<section id="целева-функция-и-оптимален-план" class="level2" data-number="2.3">
+<h2 data-number="2.3" class="anchored" data-anchor-id="целева-функция-и-оптимален-план"><span class="header-section-number">2.3</span> Целева функция и оптимален план</h2>
+<p>За да определим оптималния план графично ще начертаем прави, съответстващи на различни нива на печалба.</p>
+<p>Целевата функция зависи от две променливи, което означава, че за да я изобразим графично ще трябва да използваме трето измерение. <a href="#fig-coffee-objective" class="quarto-xref">Фигура&nbsp;<span>2.3</span></a> показва графиката на целевата функция в тримерно пространство, както и нейната проекция в двумерно пространство.</p>
+<div id="cell-fig-coffee-objective" class="cell" data-execution_count="6">
+<details class="code-fold">
+<summary>Покажи</summary>
+<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> matplotlib.pyplot <span class="im">as</span> plt</span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> mpl_toolkits.mplot3d <span class="im">import</span> Axes3D</span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> mpl_toolkits.mplot3d.art3d <span class="im">import</span> Poly3DCollection</span>
+<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a><span class="co"># Create the x, y, and z coordinate arrays</span></span>
+<span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a>x, y <span class="op">=</span> np.meshgrid(np.linspace(<span class="dv">0</span>, <span class="dv">250</span>, <span class="dv">20</span>), np.linspace(<span class="dv">0</span>, <span class="dv">250</span>, <span class="dv">20</span>))</span>
+<span id="cb3-8"><a href="#cb3-8" aria-hidden="true" tabindex="-1"></a>z <span class="op">=</span> <span class="dv">40</span> <span class="op">*</span> x <span class="op">+</span> <span class="dv">30</span> <span class="op">*</span> y</span>
+<span id="cb3-9"><a href="#cb3-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-10"><a href="#cb3-10" aria-hidden="true" tabindex="-1"></a><span class="co"># Create a figure</span></span>
+<span id="cb3-11"><a href="#cb3-11" aria-hidden="true" tabindex="-1"></a>fig <span class="op">=</span> plt.figure()</span>
+<span id="cb3-12"><a href="#cb3-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-13"><a href="#cb3-13" aria-hidden="true" tabindex="-1"></a>ax <span class="op">=</span> fig.add_subplot(<span class="dv">111</span>, projection<span class="op">=</span><span class="st">'3d'</span>)</span>
+<span id="cb3-14"><a href="#cb3-14" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-15"><a href="#cb3-15" aria-hidden="true" tabindex="-1"></a><span class="co"># Add a 3D subplot</span></span>
+<span id="cb3-16"><a href="#cb3-16" aria-hidden="true" tabindex="-1"></a>ax.plot_surface(x, y, z, rstride<span class="op">=</span><span class="dv">5</span>, cstride<span class="op">=</span><span class="dv">5</span>, edgecolor<span class="op">=</span><span class="st">'k'</span>, alpha<span class="op">=</span><span class="fl">0.5</span>)</span>
+<span id="cb3-17"><a href="#cb3-17" aria-hidden="true" tabindex="-1"></a>ax.view_init(elev<span class="op">=</span><span class="dv">25</span>, azim<span class="op">=-</span><span class="dv">120</span>)</span>
+<span id="cb3-18"><a href="#cb3-18" aria-hidden="true" tabindex="-1"></a>ax.set_xlabel(<span class="vs">r"$x_1$ (Супер, кг.)"</span>)</span>
+<span id="cb3-19"><a href="#cb3-19" aria-hidden="true" tabindex="-1"></a>ax.set_ylabel(<span class="vs">r"$x_2$ (Делукс, кг.)"</span>)</span>
+<span id="cb3-20"><a href="#cb3-20" aria-hidden="true" tabindex="-1"></a>ax.set_zlabel(<span class="vs">r"$z$ (Печалба, лв.)"</span>)</span>
+<span id="cb3-21"><a href="#cb3-21" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-22"><a href="#cb3-22" aria-hidden="true" tabindex="-1"></a>vertices_3d <span class="op">=</span> [v <span class="op">+</span> [<span class="dv">0</span>] <span class="cf">for</span> v <span class="kw">in</span> vertices]</span>
+<span id="cb3-23"><a href="#cb3-23" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-24"><a href="#cb3-24" aria-hidden="true" tabindex="-1"></a><span class="co"># Create a Poly3DCollection</span></span>
+<span id="cb3-25"><a href="#cb3-25" aria-hidden="true" tabindex="-1"></a>poly <span class="op">=</span> Poly3DCollection([vertices_3d], alpha<span class="op">=</span><span class="fl">.25</span>, linewidths<span class="op">=</span><span class="dv">1</span>, edgecolors<span class="op">=</span><span class="st">'r'</span>, facecolors<span class="op">=</span><span class="st">'c'</span>)</span>
+<span id="cb3-26"><a href="#cb3-26" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-27"><a href="#cb3-27" aria-hidden="true" tabindex="-1"></a><span class="co"># Add the Poly3DCollection to the axes</span></span>
+<span id="cb3-28"><a href="#cb3-28" aria-hidden="true" tabindex="-1"></a>ax.add_collection3d(poly)</span></code><button title="Копирай" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-display">
+<div id="fig-coffee-objective" class="quarto-figure quarto-figure-center quarto-float anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-coffee-objective-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="01-Blending_files/figure-html/fig-coffee-objective-output-1.png" class="img-fluid figure-img">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-coffee-objective-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Фигура&nbsp;2.3: Целева функция
+</figcaption>
+</figure>
+</div>
+</div>
+</div>
+<p>Горното изображение е удобно, за да разберем как изглежда целевата функция, но не ни помага да намерим максимума й в рамките на допустимото множество. Затова ще използваме проекцията на целевата функция върху равнината на допустимото множество.</p>
+<p>Нека фиксираме няколко (произволни нива на печалба) и да начертаем правите, които ги представляват. Нека тези нива са 5000, 10000 и 12000. За да изобразим тези прави ще трябва да намерим пресечните точки на тези прави с двете оси.</p>
+<p>Всички комбинации <span class="math inline">x_1</span> и <span class="math inline">x_2</span>, за които печалбата (целевата функция) е равна на 5000 лв лежат на права, определена от равенството:</p>
+<p><span class="math display">
+40x_1 + 50x_2 = 5000
+</span></p>
+<p>Всички комбинации <span class="math inline">x_1</span> и <span class="math inline">x_2</span>, за които печалбата (целевата функция) е равна на 1000 лв. лежат на права, определена от равенството</p>
+<p><span class="math display">
+40x_1 + 50x_2 = 10000
+</span></p>
+<p>Двете прави са успоредни една спрямо друга, тъй като наклонът на правите зависи от коефициентите на <span class="math inline">x_1</span> и <span class="math inline">x_2</span> в уравненията и не зависи от константите (5 000 в първото уравнение и 10 000 във второто).</p>
+</section>
+<section id="нормален-вектор" class="level2" data-number="2.4">
+<h2 data-number="2.4" class="anchored" data-anchor-id="нормален-вектор"><span class="header-section-number">2.4</span> Нормален вектор</h2>
+<p>Нека фиксираме ниво на печалба от 5000 лв. Всички комбинации от супер и делукс, които постигат точно това ниво на печалба лежат на права, дадена от следното уравнение:</p>
+<p><span class="math display">
+40x_1 + 50x_2 = 5000
+</span></p>
+<p>Тази права се пресича с оста <span class="math inline">x_1</span> при <span class="math inline">x_1 = 125</span> и с оста <span class="math inline">x_2</span> при <span class="math inline">x_2 = 100</span>. От тези две точки можем да изведем параметричното представяне на правата (за <span class="math inline">t \in \mathbb{R}</span>).</p>
+<p><span class="math display">
+\begin{pmatrix}
+x_1 \\
+x_2
+\end{pmatrix}
+= \begin{pmatrix}
+0 \\
+100
+\end{pmatrix}
++ t \left[
+\begin{pmatrix}
+125 \\
+0
+\end{pmatrix}
+-
+\begin{pmatrix}
+0 \\
+100
+\end{pmatrix}
+\right]
+</span></p>
+<p>Пресмятаме разликата между двата вектора и получаваме</p>
+<p><span class="math display">
+\begin{pmatrix}
+x_1 \\
+x_2
+\end{pmatrix}
+=
+\begin{pmatrix}
+0 \\
+100
+\end{pmatrix}
++ t
+\begin{pmatrix}
+125 \\
+-100
+\end{pmatrix}
+</span></p>
+<p>Вторият вектор показва посоката на правата, а векторът от коефициентите пред <span class="math inline">x_1</span> и <span class="math inline">x_2</span> в първоначалното уравнение е</p>
+<p><span class="math display">
+\begin{pmatrix}
+40 \\
+50
+\end{pmatrix}
+</span></p>
+<p>Два вектора са ортогонални (перпендикулярни), ако скаларното им произведение е равно на 0. Скаларното произведение на два вектора е равно на сумата от произведенията на съответните им координати. Така получаваме</p>
+<p><span class="math display">
+\begin{pmatrix}
+40 \\
+50
+\end{pmatrix}
+\cdot
+\begin{pmatrix}
+125 \\
+-100
+\end{pmatrix}
+= 40 \cdot 125 + 50 \cdot (-100) = 0
+</span></p>
+<div id="cell-7" class="cell" data-execution_count="1">
+<details class="code-fold">
+<summary>Покажи</summary>
+<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> matplotlib.pyplot <span class="im">as</span> plt</span>
+<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a>A <span class="op">=</span> np.array([<span class="dv">0</span>, <span class="dv">100</span>])</span>
+<span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a>B <span class="op">=</span> np.array([<span class="dv">125</span>, <span class="dv">0</span>])</span>
+<span id="cb4-7"><a href="#cb4-7" aria-hidden="true" tabindex="-1"></a>C <span class="op">=</span> B <span class="op">-</span> A</span>
+<span id="cb4-8"><a href="#cb4-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-9"><a href="#cb4-9" aria-hidden="true" tabindex="-1"></a><span class="co"># Create a figure</span></span>
+<span id="cb4-10"><a href="#cb4-10" aria-hidden="true" tabindex="-1"></a>fig, ax <span class="op">=</span> plt.subplots()</span>
+<span id="cb4-11"><a href="#cb4-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-12"><a href="#cb4-12" aria-hidden="true" tabindex="-1"></a><span class="co"># Plot the vectors</span></span>
+<span id="cb4-13"><a href="#cb4-13" aria-hidden="true" tabindex="-1"></a>ax.quiver(<span class="dv">0</span>, <span class="dv">0</span>, A[<span class="dv">0</span>], A[<span class="dv">1</span>], angles<span class="op">=</span><span class="st">'xy'</span>, scale_units<span class="op">=</span><span class="st">'xy'</span>, scale<span class="op">=</span><span class="dv">1</span>, color<span class="op">=</span><span class="st">'r'</span>, label<span class="op">=</span><span class="st">'A'</span>)</span>
+<span id="cb4-14"><a href="#cb4-14" aria-hidden="true" tabindex="-1"></a>ax.quiver(<span class="dv">0</span>, <span class="dv">0</span>, B[<span class="dv">0</span>], B[<span class="dv">1</span>], angles<span class="op">=</span><span class="st">'xy'</span>, scale_units<span class="op">=</span><span class="st">'xy'</span>, scale<span class="op">=</span><span class="dv">1</span>, color<span class="op">=</span><span class="st">'b'</span>, label<span class="op">=</span><span class="st">'B'</span>)</span>
+<span id="cb4-15"><a href="#cb4-15" aria-hidden="true" tabindex="-1"></a>ax.quiver(A[<span class="dv">0</span>], A[<span class="dv">1</span>], C[<span class="dv">0</span>], C[<span class="dv">1</span>], angles<span class="op">=</span><span class="st">'xy'</span>, scale_units<span class="op">=</span><span class="st">'xy'</span>, scale<span class="op">=</span><span class="dv">1</span>, color<span class="op">=</span><span class="st">'g'</span>, label<span class="op">=</span><span class="st">'B-A'</span>)</span>
+<span id="cb4-16"><a href="#cb4-16" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-17"><a href="#cb4-17" aria-hidden="true" tabindex="-1"></a><span class="co"># Set the limits of the plot</span></span>
+<span id="cb4-18"><a href="#cb4-18" aria-hidden="true" tabindex="-1"></a>ax.set_xlim([<span class="op">-</span><span class="dv">2</span>, <span class="dv">125</span>])</span>
+<span id="cb4-19"><a href="#cb4-19" aria-hidden="true" tabindex="-1"></a>ax.set_ylim([<span class="op">-</span><span class="dv">2</span>, <span class="dv">125</span>])</span>
+<span id="cb4-20"><a href="#cb4-20" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-21"><a href="#cb4-21" aria-hidden="true" tabindex="-1"></a><span class="co"># Add a legend</span></span>
+<span id="cb4-22"><a href="#cb4-22" aria-hidden="true" tabindex="-1"></a>ax.legend(loc<span class="op">=</span><span class="dv">0</span>)</span></code><button title="Копирай" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="01-Blending_files/figure-html/cell-5-output-1.png" class="img-fluid figure-img"></p>
+</figure>
+</div>
+</div>
+</div>
+<p>Нека да начертаем тези прави на графиката на допустимото множество. <a href="#fig-coffee-solution" class="quarto-xref">Фигура&nbsp;<span>2.4</span></a> показва графиката на допустимото множество и правите на печалбата от 3000 лв., 50000 лв. и 12000 лв.</p>
+<div id="cell-fig-coffee-solution" class="cell" data-execution_count="109">
+<details class="code-fold">
+<summary>Покажи</summary>
+<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>fig, ax <span class="op">=</span> plt.subplots()</span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a>ax.fill(vertices_x, vertices_y, color<span class="op">=</span><span class="st">'grey'</span>, alpha<span class="op">=</span><span class="fl">0.3</span>)</span>
+<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> v <span class="kw">in</span> vertices:</span>
+<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a>    ax.annotate(</span>
+<span id="cb5-6"><a href="#cb5-6" aria-hidden="true" tabindex="-1"></a>        <span class="ss">f"(</span><span class="sc">{</span>v[<span class="dv">0</span>]<span class="sc">}</span><span class="ss">, </span><span class="sc">{</span>v[<span class="dv">1</span>]<span class="sc">}</span><span class="ss">)"</span>,</span>
+<span id="cb5-7"><a href="#cb5-7" aria-hidden="true" tabindex="-1"></a>        (v[<span class="dv">0</span>], v[<span class="dv">1</span>]),</span>
+<span id="cb5-8"><a href="#cb5-8" aria-hidden="true" tabindex="-1"></a>        textcoords<span class="op">=</span><span class="st">"offset points"</span>,</span>
+<span id="cb5-9"><a href="#cb5-9" aria-hidden="true" tabindex="-1"></a>        xytext<span class="op">=</span>(<span class="dv">0</span>, <span class="dv">5</span>)</span>
+<span id="cb5-10"><a href="#cb5-10" aria-hidden="true" tabindex="-1"></a>    )</span>
+<span id="cb5-11"><a href="#cb5-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-12"><a href="#cb5-12" aria-hidden="true" tabindex="-1"></a>ax.plot([<span class="dv">0</span>, <span class="dv">3000</span> <span class="op">/</span> <span class="dv">40</span>], [<span class="dv">3000</span> <span class="op">/</span> <span class="dv">50</span>, <span class="dv">0</span>], label<span class="op">=</span><span class="vs">r'$40 x_1 + 50 x_2 = 3000$'</span>)</span>
+<span id="cb5-13"><a href="#cb5-13" aria-hidden="true" tabindex="-1"></a>ax.plot([<span class="dv">0</span>, <span class="dv">5000</span> <span class="op">/</span> <span class="dv">40</span>], [<span class="dv">5000</span> <span class="op">/</span> <span class="dv">50</span>, <span class="dv">0</span>], label<span class="op">=</span><span class="vs">r'$40 x_1 + 50 x_2 = 5000$'</span>)</span>
+<span id="cb5-14"><a href="#cb5-14" aria-hidden="true" tabindex="-1"></a>ax.plot([<span class="dv">0</span>, <span class="dv">12000</span> <span class="op">/</span> <span class="dv">40</span>], [<span class="dv">12000</span> <span class="op">/</span> <span class="dv">50</span>, <span class="dv">0</span>], label<span class="op">=</span><span class="vs">r'$40 x_1 + 50 x_2 = 12000$'</span>)</span>
+<span id="cb5-15"><a href="#cb5-15" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-16"><a href="#cb5-16" aria-hidden="true" tabindex="-1"></a>ax.quiver(<span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">40</span>, <span class="dv">50</span>, angles<span class="op">=</span><span class="st">'xy'</span>, scale_units<span class="op">=</span><span class="st">'xy'</span>, scale<span class="op">=</span><span class="dv">1</span>, color<span class="op">=</span><span class="st">'grey'</span>, label<span class="op">=</span><span class="st">'Нормален вектор'</span>)</span>
+<span id="cb5-17"><a href="#cb5-17" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-18"><a href="#cb5-18" aria-hidden="true" tabindex="-1"></a>ax.set_xlim((<span class="dv">0</span>, <span class="dv">260</span>))</span>
+<span id="cb5-19"><a href="#cb5-19" aria-hidden="true" tabindex="-1"></a>ax.set_ylim((<span class="dv">0</span>, <span class="dv">260</span>))</span>
+<span id="cb5-20"><a href="#cb5-20" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-21"><a href="#cb5-21" aria-hidden="true" tabindex="-1"></a>ax.legend(loc<span class="op">=</span><span class="dv">0</span>)</span></code><button title="Копирай" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-display">
+<div id="fig-coffee-solution" class="quarto-figure quarto-figure-center quarto-float anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-coffee-solution-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="01-Blending_files/figure-html/fig-coffee-solution-output-1.png" class="img-fluid figure-img">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-coffee-solution-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Фигура&nbsp;2.4: Оптимален план
+</figcaption>
+</figure>
+</div>
+</div>
+</div>
+<p>Векторът (40, 50) се нарича нормален вектор на правите на функцията на печалба и е перпендикулярен на тях. Координатите на нормалния вектор се получават от коефициентите на <span class="math inline">x_1</span> и <span class="math inline">x_2</span> в целевата функция.</p>
+<p>Правата на максималната печалба (12 000 лв.) се допира до допустимото множество в точката <span class="math inline">(x^*_1 = 200, x^*_2 = 80)</span>, която е и оптималният план.</p>
+<p>С други думи препоръката ни към кафенето е да произведе 200 кг. супер еспресо и 80 кг. делукс еспресо, за да постигне максимална печалба от 12 000 лв.</p>
+<p>За целта ще са му нужни</p>
+<p><span class="math display">
+0.5 \cdot 200 + 0.25 \cdot 80 = 120 \text{ кг. арабика}
+</span></p>
+<p>и</p>
+<p><span class="math display">
+0.5 \cdot 200 + 0.75 \cdot 80 = 160 \text{ кг. робуста}.
+</span></p>
+<p>Границата на търсенето на делукс еспресо е 150 кг., което е по-малко от 80 кг. Това означава, че кафенето ще може да продаде всичко, което произведе.</p>
+<div id="exr-paint" class="theorem exercise">
+<p><span class="theorem-title"><strong>Упражнение 2.1 (Задача 1)</strong></span> Предприятие произвежда два вида боя: екстериорна (за външни повърхности) и интериорна (за вътрешни помещения). Производството двете бои изисква три суровини: разтворител, багрило и смола. За производство на един тон екстериорна боя са нужни 6 тона разтворител, един тон багрило и 2 тона смола. За производство на един тон интериорна боя са нужни 4 тона разтворител, 2 тона багрило и 7 тона смола. На разположение са следните количества суровини: 24 тона разтворител, 6 тона багрило и 4 тона смола. Колко тона от всяка боя да произведе предприятието, за да постигне максимална печалба? От продажбата на един тон екстериорна боя предприятието печели 5 000 лв., а от продажбата на един тон интериорна боя - 4 000 лв.</p>
+<div id="tbl-exercise-paint" class="quarto-float anchored">
+<figure class="quarto-float quarto-float-tbl figure">
+<figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-tbl" id="tbl-exercise-paint-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Таблица&nbsp;2.1: Консумация на материали за производството на интериорна и екстериорна боя и печалба за продаден тон
+</figcaption>
+<div aria-describedby="tbl-exercise-paint-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<table class="caption-top table">
+<colgroup>
+<col style="width: 29%">
+<col style="width: 19%">
+<col style="width: 17%">
+<col style="width: 33%">
+</colgroup>
+<thead>
+<tr class="header">
+<th></th>
+<th>Екстериорна боя</th>
+<th>Интериорна боя</th>
+<th>Дневна наличност на ресурс</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Разтворител</td>
+<td>6</td>
+<td>4</td>
+<td>24</td>
+</tr>
+<tr class="even">
+<td>Багрило</td>
+<td>1</td>
+<td>2</td>
+<td>6</td>
+</tr>
+<tr class="odd">
+<td>Смола</td>
+<td>2</td>
+<td>7</td>
+<td>4</td>
+</tr>
+<tr class="even">
+<td>Печалба (1 000 лв./тон)</td>
+<td>5</td>
+<td>4</td>
+<td></td>
+</tr>
+</tbody>
+</table>
+</div>
+</figure>
+</div>
+<p>Съставете математически модел, който да намери оптималния план за производство на боите.</p>
+</div>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-2-contents" aria-controls="callout-2" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Математически модел
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-2" class="callout-2-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p>Целеви променливи: <span class="math display">
+\begin{align*}
+&amp; x_1: \text{ Екстериорна боя (тонове)}\\
+&amp; x_2: \text{ Интериорна боя (тонове)}
+\end{align*}
+</span></p>
+<p><span class="math display">
+\max z = 5 x_1 + 4 x_2 \text{ (целева функция)}
+</span></p>
+<p>Ограничения:</p>
+<p><span class="math display">
+\begin{align*}
+6x_1 + 4x_2 &amp; \leq 24 \text{ (разтворител)}\\
+x_1 + 2x_2 &amp; \leq 6 \text{ (багрило)}\\
+2x_1 + 7x_2 &amp; \leq 4 \text{ (смола)}\\
+x_1 &amp; \geq 0 \\
+x_2 &amp; \geq 0
+\end{align*}
+</span></p>
+</div>
+</div>
+</div>
+<div id="cell-12" class="cell" data-execution_count="1">
+<details class="code-fold">
+<summary>Покажи</summary>
+<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> gurobipy <span class="im">as</span> gp</span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> gurobipy <span class="im">import</span> GRB</span>
+<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Create a new model</span></span>
+<span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a>m <span class="op">=</span> gp.Model(<span class="st">"Paint"</span>)</span>
+<span id="cb6-6"><a href="#cb6-6" aria-hidden="true" tabindex="-1"></a>m.Params.LogToConsole <span class="op">=</span> <span class="dv">0</span></span>
+<span id="cb6-7"><a href="#cb6-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-8"><a href="#cb6-8" aria-hidden="true" tabindex="-1"></a><span class="co"># Create variables</span></span>
+<span id="cb6-9"><a href="#cb6-9" aria-hidden="true" tabindex="-1"></a>p_exterior <span class="op">=</span> m.addVar(lb<span class="op">=</span><span class="dv">0</span>, name<span class="op">=</span><span class="st">"exterior"</span>)</span>
+<span id="cb6-10"><a href="#cb6-10" aria-hidden="true" tabindex="-1"></a>p_interior <span class="op">=</span> m.addVar(lb<span class="op">=</span><span class="dv">0</span>, name<span class="op">=</span><span class="st">"interior"</span>)</span>
+<span id="cb6-11"><a href="#cb6-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-12"><a href="#cb6-12" aria-hidden="true" tabindex="-1"></a>m.setObjective(<span class="dv">5</span> <span class="op">*</span> p_exterior <span class="op">+</span> <span class="dv">4</span> <span class="op">*</span> p_interior, GRB.MAXIMIZE)</span>
+<span id="cb6-13"><a href="#cb6-13" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-14"><a href="#cb6-14" aria-hidden="true" tabindex="-1"></a>m.addConstr(<span class="dv">6</span> <span class="op">*</span> p_exterior <span class="op">+</span> <span class="dv">4</span> <span class="op">*</span> p_interior <span class="op">&lt;=</span> <span class="dv">24</span>, <span class="st">"Solvent"</span>)</span>
+<span id="cb6-15"><a href="#cb6-15" aria-hidden="true" tabindex="-1"></a>m.addConstr(<span class="dv">1</span> <span class="op">*</span> p_exterior <span class="op">+</span> <span class="dv">2</span> <span class="op">*</span> p_interior <span class="op">&lt;=</span> <span class="dv">6</span>, <span class="st">"Dye"</span>)</span>
+<span id="cb6-16"><a href="#cb6-16" aria-hidden="true" tabindex="-1"></a>m.addConstr(<span class="dv">2</span> <span class="op">*</span> p_exterior <span class="op">+</span> <span class="dv">7</span> <span class="op">*</span> p_interior <span class="op">&lt;=</span> <span class="dv">4</span>, <span class="st">"Resin"</span>)</span>
+<span id="cb6-17"><a href="#cb6-17" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-18"><a href="#cb6-18" aria-hidden="true" tabindex="-1"></a>m.optimize()</span>
+<span id="cb6-19"><a href="#cb6-19" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-20"><a href="#cb6-20" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"Optimal solution: p_exterior = </span><span class="sc">{</span>p_exterior<span class="sc">.</span>x<span class="sc">}</span><span class="ss">, p_interior = </span><span class="sc">{</span>p_interior<span class="sc">.</span>x<span class="sc">}</span><span class="ss">"</span>)</span></code><button title="Копирай" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code>Restricted license - for non-production use only - expires 2025-11-24
+Optimal solution: p_exterior = 2.0, p_interior = 0.0</code></pre>
+</div>
+</div>
+
+
+</section>
+
+</main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+window.document.addEventListener("DOMContentLoaded", function (event) {
+  const toggleBodyColorMode = (bsSheetEl) => {
+    const mode = bsSheetEl.getAttribute("data-mode");
+    const bodyEl = window.document.querySelector("body");
+    if (mode === "dark") {
+      bodyEl.classList.add("quarto-dark");
+      bodyEl.classList.remove("quarto-light");
+    } else {
+      bodyEl.classList.add("quarto-light");
+      bodyEl.classList.remove("quarto-dark");
+    }
+  }
+  const toggleBodyColorPrimary = () => {
+    const bsSheetEl = window.document.querySelector("link#quarto-bootstrap");
+    if (bsSheetEl) {
+      toggleBodyColorMode(bsSheetEl);
+    }
+  }
+  toggleBodyColorPrimary();  
+  const icon = "";
+  const anchorJS = new window.AnchorJS();
+  anchorJS.options = {
+    placement: 'right',
+    icon: icon
+  };
+  anchorJS.add('.anchored');
+  const isCodeAnnotation = (el) => {
+    for (const clz of el.classList) {
+      if (clz.startsWith('code-annotation-')) {                     
+        return true;
+      }
+    }
+    return false;
+  }
+  const clipboard = new window.ClipboardJS('.code-copy-button', {
+    text: function(trigger) {
+      const codeEl = trigger.previousElementSibling.cloneNode(true);
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+    }
+  });
+  clipboard.on('success', function(e) {
+    // button target
+    const button = e.trigger;
+    // don't keep focus
+    button.blur();
+    // flash "checked"
+    button.classList.add('code-copy-button-checked');
+    var currentTitle = button.getAttribute("title");
+    button.setAttribute("title", "Копирано!");
+    let tooltip;
+    if (window.bootstrap) {
+      button.setAttribute("data-bs-toggle", "tooltip");
+      button.setAttribute("data-bs-placement", "left");
+      button.setAttribute("data-bs-title", "Копирано!");
+      tooltip = new bootstrap.Tooltip(button, 
+        { trigger: "manual", 
+          customClass: "code-copy-button-tooltip",
+          offset: [0, -8]});
+      tooltip.show();    
+    }
+    setTimeout(function() {
+      if (tooltip) {
+        tooltip.hide();
+        button.removeAttribute("data-bs-title");
+        button.removeAttribute("data-bs-toggle");
+        button.removeAttribute("data-bs-placement");
+      }
+      button.setAttribute("title", currentTitle);
+      button.classList.remove('code-copy-button-checked');
+    }, 1000);
+    // clear code selection
+    e.clearSelection();
+  });
+    var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+    var mailtoRegex = new RegExp(/^mailto:/);
+      var filterRegex = new RegExp('/' + window.location.host + '/');
+    var isInternal = (href) => {
+        return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+    }
+    // Inspect non-navigation links and adorn them if external
+ 	var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool)');
+    for (var i=0; i<links.length; i++) {
+      const link = links[i];
+      if (!isInternal(link.href)) {
+        // undo the damage that might have been done by quarto-nav.js in the case of
+        // links that we want to consider external
+        if (link.dataset.originalHref !== undefined) {
+          link.href = link.dataset.originalHref;
+        }
+      }
+    }
+  function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+    const config = {
+      allowHTML: true,
+      maxWidth: 500,
+      delay: 100,
+      arrow: false,
+      appendTo: function(el) {
+          return el.parentElement;
+      },
+      interactive: true,
+      interactiveBorder: 10,
+      theme: 'quarto',
+      placement: 'bottom-start',
+    };
+    if (contentFn) {
+      config.content = contentFn;
+    }
+    if (onTriggerFn) {
+      config.onTrigger = onTriggerFn;
+    }
+    if (onUntriggerFn) {
+      config.onUntrigger = onUntriggerFn;
+    }
+    window.tippy(el, config); 
+  }
+  const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+  for (var i=0; i<noterefs.length; i++) {
+    const ref = noterefs[i];
+    tippyHover(ref, function() {
+      // use id or data attribute instead here
+      let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+      try { href = new URL(href).hash; } catch {}
+      const id = href.replace(/^#\/?/, "");
+      const note = window.document.getElementById(id);
+      if (note) {
+        return note.innerHTML;
+      } else {
+        return "";
+      }
+    });
+  }
+  const xrefs = window.document.querySelectorAll('a.quarto-xref');
+  const processXRef = (id, note) => {
+    // Strip column container classes
+    const stripColumnClz = (el) => {
+      el.classList.remove("page-full", "page-columns");
+      if (el.children) {
+        for (const child of el.children) {
+          stripColumnClz(child);
+        }
+      }
+    }
+    stripColumnClz(note)
+    if (id === null || id.startsWith('sec-')) {
+      // Special case sections, only their first couple elements
+      const container = document.createElement("div");
+      if (note.children && note.children.length > 2) {
+        container.appendChild(note.children[0].cloneNode(true));
+        for (let i = 1; i < note.children.length; i++) {
+          const child = note.children[i];
+          if (child.tagName === "P" && child.innerText === "") {
+            continue;
+          } else {
+            container.appendChild(child.cloneNode(true));
+            break;
+          }
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(container);
+        }
+        return container.innerHTML
+      } else {
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        return note.innerHTML;
+      }
+    } else {
+      // Remove any anchor links if they are present
+      const anchorLink = note.querySelector('a.anchorjs-link');
+      if (anchorLink) {
+        anchorLink.remove();
+      }
+      if (window.Quarto?.typesetMath) {
+        window.Quarto.typesetMath(note);
+      }
+      // TODO in 1.5, we should make sure this works without a callout special case
+      if (note.classList.contains("callout")) {
+        return note.outerHTML;
+      } else {
+        return note.innerHTML;
+      }
+    }
+  }
+  for (var i=0; i<xrefs.length; i++) {
+    const xref = xrefs[i];
+    tippyHover(xref, undefined, function(instance) {
+      instance.disable();
+      let url = xref.getAttribute('href');
+      let hash = undefined; 
+      if (url.startsWith('#')) {
+        hash = url;
+      } else {
+        try { hash = new URL(url).hash; } catch {}
+      }
+      if (hash) {
+        const id = hash.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note !== null) {
+          try {
+            const html = processXRef(id, note.cloneNode(true));
+            instance.setContent(html);
+          } finally {
+            instance.enable();
+            instance.show();
+          }
+        } else {
+          // See if we can fetch this
+          fetch(url.split('#')[0])
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.getElementById(id);
+            if (note !== null) {
+              const html = processXRef(id, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      } else {
+        // See if we can fetch a full url (with no hash to target)
+        // This is a special case and we should probably do some content thinning / targeting
+        fetch(url)
+        .then(res => res.text())
+        .then(html => {
+          const parser = new DOMParser();
+          const htmlDoc = parser.parseFromString(html, "text/html");
+          const note = htmlDoc.querySelector('main.content');
+          if (note !== null) {
+            // This should only happen for chapter cross references
+            // (since there is no id in the URL)
+            // remove the first header
+            if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+              note.children[0].remove();
+            }
+            const html = processXRef(null, note);
+            instance.setContent(html);
+          } 
+        }).finally(() => {
+          instance.enable();
+          instance.show();
+        });
+      }
+    }, function(instance) {
+    });
+  }
+      let selectedAnnoteEl;
+      const selectorForAnnotation = ( cell, annotation) => {
+        let cellAttr = 'data-code-cell="' + cell + '"';
+        let lineAttr = 'data-code-annotation="' +  annotation + '"';
+        const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+        return selector;
+      }
+      const selectCodeLines = (annoteEl) => {
+        const doc = window.document;
+        const targetCell = annoteEl.getAttribute("data-target-cell");
+        const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+        const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+        const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+        const lineIds = lines.map((line) => {
+          return targetCell + "-" + line;
+        })
+        let top = null;
+        let height = null;
+        let parent = null;
+        if (lineIds.length > 0) {
+            //compute the position of the single el (top and bottom and make a div)
+            const el = window.document.getElementById(lineIds[0]);
+            top = el.offsetTop;
+            height = el.offsetHeight;
+            parent = el.parentElement.parentElement;
+          if (lineIds.length > 1) {
+            const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+            const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+            height = bottom - top;
+          }
+          if (top !== null && height !== null && parent !== null) {
+            // cook up a div (if necessary) and position it 
+            let div = window.document.getElementById("code-annotation-line-highlight");
+            if (div === null) {
+              div = window.document.createElement("div");
+              div.setAttribute("id", "code-annotation-line-highlight");
+              div.style.position = 'absolute';
+              parent.appendChild(div);
+            }
+            div.style.top = top - 2 + "px";
+            div.style.height = height + 4 + "px";
+            div.style.left = 0;
+            let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+            if (gutterDiv === null) {
+              gutterDiv = window.document.createElement("div");
+              gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+              gutterDiv.style.position = 'absolute';
+              const codeCell = window.document.getElementById(targetCell);
+              const gutter = codeCell.querySelector('.code-annotation-gutter');
+              gutter.appendChild(gutterDiv);
+            }
+            gutterDiv.style.top = top - 2 + "px";
+            gutterDiv.style.height = height + 4 + "px";
+          }
+          selectedAnnoteEl = annoteEl;
+        }
+      };
+      const unselectCodeLines = () => {
+        const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+        elementsIds.forEach((elId) => {
+          const div = window.document.getElementById(elId);
+          if (div) {
+            div.remove();
+          }
+        });
+        selectedAnnoteEl = undefined;
+      };
+        // Handle positioning of the toggle
+    window.addEventListener(
+      "resize",
+      throttle(() => {
+        elRect = undefined;
+        if (selectedAnnoteEl) {
+          selectCodeLines(selectedAnnoteEl);
+        }
+      }, 10)
+    );
+    function throttle(fn, ms) {
+    let throttle = false;
+    let timer;
+      return (...args) => {
+        if(!throttle) { // first call gets through
+            fn.apply(this, args);
+            throttle = true;
+        } else { // all the others get throttled
+            if(timer) clearTimeout(timer); // cancel #2
+            timer = setTimeout(() => {
+              fn.apply(this, args);
+              timer = throttle = false;
+            }, ms);
+        }
+      };
+    }
+      // Attach click handler to the DT
+      const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+      for (const annoteDlNode of annoteDls) {
+        annoteDlNode.addEventListener('click', (event) => {
+          const clickedEl = event.target;
+          if (clickedEl !== selectedAnnoteEl) {
+            unselectCodeLines();
+            const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+            if (activeEl) {
+              activeEl.classList.remove('code-annotation-active');
+            }
+            selectCodeLines(clickedEl);
+            clickedEl.classList.add('code-annotation-active');
+          } else {
+            // Unselect the line
+            unselectCodeLines();
+            clickedEl.classList.remove('code-annotation-active');
+          }
+        });
+      }
+  const findCites = (el) => {
+    const parentEl = el.parentElement;
+    if (parentEl) {
+      const cites = parentEl.dataset.cites;
+      if (cites) {
+        return {
+          el,
+          cites: cites.split(' ')
+        };
+      } else {
+        return findCites(el.parentElement)
+      }
+    } else {
+      return undefined;
+    }
+  };
+  var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+  for (var i=0; i<bibliorefs.length; i++) {
+    const ref = bibliorefs[i];
+    const citeInfo = findCites(ref);
+    if (citeInfo) {
+      tippyHover(citeInfo.el, function() {
+        var popup = window.document.createElement('div');
+        citeInfo.cites.forEach(function(cite) {
+          var citeDiv = window.document.createElement('div');
+          citeDiv.classList.add('hanging-indent');
+          citeDiv.classList.add('csl-entry');
+          var biblioDiv = window.document.getElementById('ref-' + cite);
+          if (biblioDiv) {
+            citeDiv.innerHTML = biblioDiv.innerHTML;
+          }
+          popup.appendChild(citeDiv);
+        });
+        return popup.innerHTML;
+      });
+    }
+  }
+});
+</script>
+<nav class="page-navigation">
+  <div class="nav-page nav-page-previous">
+      <a href="../02-Introduction/index.html" class="pagination-link" aria-label="Въведение">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">Въведение</span></span>
+      </a>          
+  </div>
+  <div class="nav-page nav-page-next">
+      <a href="../03-Graphical-Method/02-Sensitivity.html" class="pagination-link" aria-label="Анализ на чувствителността на решението">
+        <span class="nav-page-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Анализ на чувствителността на решението</span></span> <i class="bi bi-arrow-right-short"></i>
+      </a>
+  </div>
+</nav>
+</div> <!-- /content -->
+
+
+
+
+</body></html>
