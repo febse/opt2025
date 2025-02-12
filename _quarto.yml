@@ -3,22 +3,22 @@ project:
 
 lang: bg
 book:
-  title: "Въведение в математическата оптимизация"
+  title: "Въведение в линейната оптимизация"
   author: "Бойко Амаров"
   date: "4/02/2024"
-
+  
   chapters:
     - index.qmd
     # - part: 01-Python/index.qmd
     - 02-Introduction/index.ipynb
-    - 03-Graphical-Method/01-Blending.ipynb
-    - 03-Graphical-Method/02-Sensitivity.ipynb
-    - 04-Simplex/01-Canonical-Representation.ipynb
-    - 04-Simplex/02-Simplex-Method.ipynb
-    - 05-Duals/01-Duals.ipynb
-    - 05-Duals/02-Sensitivity.ipynb
-    - 06-Transportation.ipynb
-    - 00-Assignments/assignments.ipynb
+    # - 03-Graphical-Method/01-Blending.ipynb
+    # - 03-Graphical-Method/02-Sensitivity.ipynb
+    # - 04-Simplex/01-Canonical-Representation.ipynb
+    # - 04-Simplex/02-Simplex-Method.ipynb
+    # - 05-Duals/01-Duals.ipynb
+    # - 05-Duals/02-Sensitivity.ipynb
+    # - 06-Transportation.ipynb
+    # - 00-Assignments/assignments.ipynb
     # - 00-Assignments/covid-facilities.ipynb
       # chapters:
       #   - 01-Python/01-01-Basics.ipynb
@@ -34,7 +34,7 @@ book:
     # - 04-Simple-ANOVA.qmd
     # - 05-Hypothesis-Testing-and-CI.qmd
     - Literature.qmd
-    - izpit.qmd
+    # - izpit.qmd
     - references.qmd
 
 bibliography: references.bib

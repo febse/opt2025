@@ -1,4 +1,4 @@
-name: opt2024
+name: opt2025
 channels:
   - defaults
   - gurobi
@@ -11,10 +11,12 @@ dependencies:
   - seaborn
   - networkx
   - pip
+  - plotly
   - pydot
+  - qrcode
   - graphviz
-  - ipykernel
-  - gurobi=11.0.0
+  - jupyter
+  - gurobi=12.0.1
   - pip:
     - polytope==0.2.4
-prefix: /home/amarov/anaconda3/envs/opt2024
+prefix: /home/amarov/anaconda3/envs/opt2025
