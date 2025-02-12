@@ -1,0 +1,20 @@
+{
+  "image": "mcr.microsoft.com/devcontainers/universal:2",
+  "waitFor": "onCreateCommand",
+  "updateContentCommand": "python3 -m pip install -r requirements.txt",
+  "postCreateCommand": "",
+  "customizations": {
+    "codespaces": {
+      "openFiles": []
+    },
+    "vscode": {
+      "extensions": [
+        "GitHub.copilot",
+        "ms-toolsai.jupyter",
+        "ms-python.python",
+        "ms-python.autopep8"
+      ],
+      "editor.defaultFormatter": "ms-python.autopep8"
+    }
+  }
+}

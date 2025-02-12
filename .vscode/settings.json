@@ -1,0 +1,58 @@
+{
+  // See https://go.microsoft.com/fwlink/?LinkId=827846 to learn about workspace recommendations.
+  // Extension identifier format: ${publisher}.${name}. Example: vscode.csharp
+
+  // List of extensions which should be recommended for users of this workspace.
+  
+  "[python]": {
+    "editor.defaultFormatter": "ms-python.autopep8",
+    "editor.formatOnSave": true,
+    "editor.codeActionsOnSave": {
+      "source.organizeImports": "explicit"
+    }
+  },
+    // List of extensions recommended by VS Code that should not be recommended for users of this workspace.
+  "unwantedRecommendations": [
+    // Add extensions you don't want to recommend here
+  ],
+  "remote.autoForwardPortsFallback": 0,
+  "PandocCiter.DefaultBibs": [   
+    "references.bib"
+],
+"cSpell.language": "en,bg",
+"cSpell.words": [
+  "Amarov",
+  "ANOVA",
+  "arabica",
+  "autopep",
+  "boyko",
+  "Boyko",
+  "codespaces",
+  "debugpy",
+  "github",
+  "hosten",
+  "ipynb",
+  "jupyter",
+  "katex",
+  "Kursrepositories",
+  "Kursrepository",
+  "Miniconda",
+  "Numpy",
+  "Regressionsmodell",
+  "robusta",
+  "toolsai",
+  "Амаров",
+  "арабика",
+  "биномния",
+  "Бутиково",
+  "Дефицитност",
+  "екстериорна",
+  "интериорна",
+  "максимизационната",
+  "неотрицателност",
+  "Неотрицателността",
+  "робуста",
+  "умлаути",
+  "флуктуациите"
+]
+}
