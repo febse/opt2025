@@ -2,12 +2,12 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="bg" xml:lang="bg"><head>
 
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.4.555">
+<meta name="generator" content="quarto-1.6.40">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>Въведение в математическата оптимизация - 9&nbsp; Задачи</title>
+<title>9&nbsp; Задачи – Въведение в математическата оптимизация</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -33,7 +33,7 @@ div.sourceCode { overflow: auto; }
 }
 @media print {
 pre > code.sourceCode { white-space: pre-wrap; }
-pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+pre > code.sourceCode > span { display: inline-block; text-indent: -5em; padding-left: 5em; }
 }
 pre.numberSource code
   { counter-reset: source-line 0; }
@@ -71,10 +71,10 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <script src="../site_libs/quarto-html/tippy.umd.min.js"></script>
 <script src="../site_libs/quarto-html/anchor.min.js"></script>
 <link href="../site_libs/quarto-html/tippy.css" rel="stylesheet">
-<link href="../site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<link href="../site_libs/quarto-html/quarto-syntax-highlighting-549806ee2085284f45b00abea8c6df48.css" rel="stylesheet" id="quarto-text-highlighting-styles">
 <script src="../site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="../site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
+<link href="../site_libs/bootstrap/bootstrap-2ce9fc9ac8b614e7ffef13962cc12eaf.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
 <script id="quarto-search-options" type="application/json">{
   "location": "sidebar",
   "copy-button": false,
@@ -109,7 +109,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 
 <script type="application/javascript">define('jquery', [],function() {return window.jQuery;})</script>
 
-  <script>window.backupDefine = window.define; window.define = undefined;</script><script src="https://cdn.jsdelivr.net/npm/katex@0.15.1/dist/katex.min.js"></script>
+  <script>window.backupDefine = window.define; window.define = undefined;</script><script src="https://cdn.jsdelivr.net/npm/katex@latest/dist/katex.min.js"></script>
   <script>document.addEventListener("DOMContentLoaded", function () {
  var mathElements = document.getElementsByClassName("math");
  var macros = [];
@@ -124,7 +124,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
    });
 }}});
   </script>
-  <script>window.define = window.backupDefine; window.backupDefine = undefined;</script><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.15.1/dist/katex.min.css">
+  <script>window.define = window.backupDefine; window.backupDefine = undefined;</script><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@latest/dist/katex.min.css">
 
 <script type="text/javascript">
 const typesetMath = (el) => {
@@ -161,13 +161,13 @@ window.Quarto = {
   <header id="quarto-header" class="headroom fixed-top">
   <nav class="quarto-secondary-nav">
     <div class="container-fluid d-flex">
-      <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Включи/скрий страничната навигация" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+      <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Включи/скрий страничната навигация" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
         <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../00-Assignments/assignments.html"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">Задачи</span></a></li></ol></nav>
-        <a class="flex-grow-1" role="button" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Включи/скрий страничната навигация" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
+        <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Включи/скрий страничната навигация" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
-      <button type="button" class="btn quarto-search-button" aria-label="" onclick="window.quartoOpenSearch();">
+      <button type="button" class="btn quarto-search-button" aria-label="Търси" onclick="window.quartoOpenSearch();">
         <i class="bi bi-search"></i>
       </button>
     </div>
@@ -485,7 +485,7 @@ x_{п}, x_{а}, x_{н}, x_{з}, x_{т} \geq 0
 <summary>Покажи</summary>
 <div class="sourceCode cell-code" id="cb4"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>vars_df</span></code><button title="Копирай" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
-<div id="tbl-bank-loans-variables" class="cell quarto-float anchored" data-executetime="{&quot;end_time&quot;:&quot;2024-06-07T13:32:49.080968Z&quot;,&quot;start_time&quot;:&quot;2024-06-07T13:32:49.072771Z&quot;}" data-execution_count="4">
+<div id="tbl-bank-loans-variables" class="cell quarto-float quarto-figure quarto-figure-center anchored" data-execution_count="4" data-executetime="{&quot;end_time&quot;:&quot;2024-06-07T13:32:49.080968Z&quot;,&quot;start_time&quot;:&quot;2024-06-07T13:32:49.072771Z&quot;}">
 <figure class="quarto-float quarto-float-tbl figure">
 <figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-tbl" id="tbl-bank-loans-variables-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 Таблица&nbsp;9.1: Стойности на променливите в оптимума за банковите заеми
@@ -549,7 +549,7 @@ x_{п}, x_{а}, x_{н}, x_{з}, x_{т} \geq 0
 <summary>Покажи</summary>
 <div class="sourceCode cell-code" id="cb5"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>constr_df</span></code><button title="Копирай" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
-<div id="tbl-bank-loans-constraints" class="cell quarto-float anchored" data-executetime="{&quot;end_time&quot;:&quot;2024-06-07T13:32:49.104794Z&quot;,&quot;start_time&quot;:&quot;2024-06-07T13:32:49.081980Z&quot;}" data-execution_count="5">
+<div id="tbl-bank-loans-constraints" class="cell quarto-float quarto-figure quarto-figure-center anchored" data-execution_count="5" data-executetime="{&quot;end_time&quot;:&quot;2024-06-07T13:32:49.104794Z&quot;,&quot;start_time&quot;:&quot;2024-06-07T13:32:49.081980Z&quot;}">
 <figure class="quarto-float quarto-float-tbl figure">
 <figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-tbl" id="tbl-bank-loans-constraints-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 Таблица&nbsp;9.2: Ограничения за банковите заеми в оптимума за банковите заеми
@@ -718,7 +718,7 @@ Objective: 314.3115942028985</code></pre>
 <summary>Покажи</summary>
 <div class="sourceCode cell-code" id="cb8"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a>var_df</span></code><button title="Копирай" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
-<div id="tbl-urban-planning-variables" class="cell quarto-float anchored" data-executetime="{&quot;end_time&quot;:&quot;2024-06-07T13:32:49.146873Z&quot;,&quot;start_time&quot;:&quot;2024-06-07T13:32:49.123911Z&quot;}" data-execution_count="7">
+<div id="tbl-urban-planning-variables" class="cell quarto-float quarto-figure quarto-figure-center anchored" data-execution_count="7" data-executetime="{&quot;end_time&quot;:&quot;2024-06-07T13:32:49.146873Z&quot;,&quot;start_time&quot;:&quot;2024-06-07T13:32:49.123911Z&quot;}">
 <figure class="quarto-float quarto-float-tbl figure">
 <figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-tbl" id="tbl-urban-planning-variables-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 Таблица&nbsp;9.3: Стойности на променливите в оптимума за градското строителство
@@ -782,7 +782,7 @@ Objective: 314.3115942028985</code></pre>
 <summary>Покажи</summary>
 <div class="sourceCode cell-code" id="cb9"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a>constr_df</span></code><button title="Копирай" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
-<div id="tbl-urban-planning-constraints" class="cell quarto-float anchored" data-executetime="{&quot;end_time&quot;:&quot;2024-06-07T13:32:49.166906Z&quot;,&quot;start_time&quot;:&quot;2024-06-07T13:32:49.148307Z&quot;}" data-execution_count="8">
+<div id="tbl-urban-planning-constraints" class="cell quarto-float quarto-figure quarto-figure-center anchored" data-execution_count="8" data-executetime="{&quot;end_time&quot;:&quot;2024-06-07T13:32:49.166906Z&quot;,&quot;start_time&quot;:&quot;2024-06-07T13:32:49.148307Z&quot;}">
 <figure class="quarto-float quarto-float-tbl figure">
 <figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-tbl" id="tbl-urban-planning-constraints-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 Таблица&nbsp;9.4: Ограничения за градското строителство в оптимума за градското строителство
@@ -1053,7 +1053,7 @@ s_{jackets}, s_{hats}, s_{gloves}, s_{pants} \geq 0
 <summary>Покажи</summary>
 <div class="sourceCode cell-code" id="cb11"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a>var_df</span></code><button title="Копирай" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
-<div id="tbl-production-penalty-variables" class="cell quarto-float anchored" data-executetime="{&quot;end_time&quot;:&quot;2024-06-07T13:32:49.211746Z&quot;,&quot;start_time&quot;:&quot;2024-06-07T13:32:49.205943Z&quot;}" data-execution_count="10">
+<div id="tbl-production-penalty-variables" class="cell quarto-float quarto-figure quarto-figure-center anchored" data-execution_count="10" data-executetime="{&quot;end_time&quot;:&quot;2024-06-07T13:32:49.211746Z&quot;,&quot;start_time&quot;:&quot;2024-06-07T13:32:49.205943Z&quot;}">
 <figure class="quarto-float quarto-float-tbl figure">
 <figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-tbl" id="tbl-production-penalty-variables-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 Таблица&nbsp;9.5: Стойности на променливите в оптимума за производство и неустойки
@@ -1111,7 +1111,7 @@ s_{jackets}, s_{hats}, s_{gloves}, s_{pants} \geq 0
 <summary>Покажи</summary>
 <div class="sourceCode cell-code" id="cb12"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a>constr_df</span></code><button title="Копирай" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
-<div id="tbl-production-penalty-constraints" class="cell quarto-float anchored" data-executetime="{&quot;end_time&quot;:&quot;2024-06-07T13:32:49.250676Z&quot;,&quot;start_time&quot;:&quot;2024-06-07T13:32:49.244293Z&quot;}" data-execution_count="11">
+<div id="tbl-production-penalty-constraints" class="cell quarto-float quarto-figure quarto-figure-center anchored" data-execution_count="11" data-executetime="{&quot;end_time&quot;:&quot;2024-06-07T13:32:49.250676Z&quot;,&quot;start_time&quot;:&quot;2024-06-07T13:32:49.244293Z&quot;}">
 <figure class="quarto-float quarto-float-tbl figure">
 <figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-tbl" id="tbl-production-penalty-constraints-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 Таблица&nbsp;9.6: Ограничения за производство и неустойки в оптимума за производство и неустойки
@@ -1323,7 +1323,7 @@ y_{jan}, y_{feb}, y_{mar}, y_{apr}, y_{may}, y_{jun} &amp; \geq 0
 <summary>Покажи</summary>
 <div class="sourceCode cell-code" id="cb14"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a>var_df</span></code><button title="Копирай" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
-<div id="tbl-production-storage-variables" class="cell quarto-float anchored" data-executetime="{&quot;end_time&quot;:&quot;2024-06-07T13:32:49.589086Z&quot;,&quot;start_time&quot;:&quot;2024-06-07T13:32:49.580005Z&quot;}" data-execution_count="13">
+<div id="tbl-production-storage-variables" class="cell quarto-float quarto-figure quarto-figure-center anchored" data-execution_count="13" data-executetime="{&quot;end_time&quot;:&quot;2024-06-07T13:32:49.589086Z&quot;,&quot;start_time&quot;:&quot;2024-06-07T13:32:49.580005Z&quot;}">
 <figure class="quarto-float quarto-float-tbl figure">
 <figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-tbl" id="tbl-production-storage-variables-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 Таблица&nbsp;9.7: Стойности на променливите в оптимума за производство и склад
@@ -1429,7 +1429,7 @@ y_{jan}, y_{feb}, y_{mar}, y_{apr}, y_{may}, y_{jun} &amp; \geq 0
 <summary>Покажи</summary>
 <div class="sourceCode cell-code" id="cb15"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a>constr_df</span></code><button title="Копирай" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
-<div id="tbl-production-storage-constraints" class="cell quarto-float anchored" data-executetime="{&quot;end_time&quot;:&quot;2024-06-07T13:32:49.929728Z&quot;,&quot;start_time&quot;:&quot;2024-06-07T13:32:49.922975Z&quot;}" data-execution_count="14">
+<div id="tbl-production-storage-constraints" class="cell quarto-float quarto-figure quarto-figure-center anchored" data-execution_count="14" data-executetime="{&quot;end_time&quot;:&quot;2024-06-07T13:32:49.929728Z&quot;,&quot;start_time&quot;:&quot;2024-06-07T13:32:49.922975Z&quot;}">
 <figure class="quarto-float quarto-float-tbl figure">
 <figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-tbl" id="tbl-production-storage-constraints-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 Таблица&nbsp;9.8: Ограничения за производство и склад в оптимума за производство и склад
@@ -1650,7 +1650,7 @@ S_i = S^{+}_i - S^{-}_i
 <p>Виж <a href="#fig-refinery" class="quarto-xref">Фигура&nbsp;<span>9.1</span></a> за производствената схема на рафинерията.</p>
 <div class="cell" data-layout-align="default">
 <div class="cell-output-display">
-<div id="fig-refinery" class="quarto-figure quarto-figure-center quarto-float anchored">
+<div id="fig-refinery" class="quarto-float quarto-figure quarto-figure-center anchored">
 <figure class="quarto-float quarto-float-fig figure">
 <div aria-describedby="fig-refinery-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 <div>
@@ -1959,7 +1959,7 @@ Objective: 875000.0</code></pre>
 <span id="cb20-22"><a href="#cb20-22" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code><button title="Копирай" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <div class="cell-output cell-output-display">
-<div id="fig-bus-schedule-graph" class="quarto-figure quarto-figure-center quarto-float anchored">
+<div id="fig-bus-schedule-graph" class="quarto-float quarto-figure quarto-figure-center anchored">
 <figure class="quarto-float quarto-float-fig figure">
 <div aria-describedby="fig-bus-schedule-graph-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 <img src="assignments_files/figure-html/fig-bus-schedule-graph-output-1.png" class="img-fluid figure-img">
@@ -2194,7 +2194,7 @@ Warning: to let Gurobi read it back, use rlp format</code></pre>
 <li>Нека <span class="math inline">x_A, x_B, x_C</span> са произведените количества от продуктите A, B и C в кг. Тогава целевата функция.</li>
 </ol>
 <p>От описанието на съставките на трите продукта можем да изразим пропорциите на съставките в проценти от общото количество на продукта (<a href="#tbl-cereals-composition" class="quarto-xref">Таблица&nbsp;<span>9.9</span></a>).</p>
-<div id="tbl-cereals-composition" class="quarto-float anchored">
+<div id="tbl-cereals-composition" class="quarto-float quarto-figure quarto-figure-center anchored">
 <figure class="quarto-float quarto-float-tbl figure">
 <figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-tbl" id="tbl-cereals-composition-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 Таблица&nbsp;9.9: Състав на продуктите A, B и C
@@ -2407,7 +2407,7 @@ x_{Cо} = (60/2) x_{Cб} \\
 <section id="радиотерапия" class="level2" data-number="9.10">
 <h2 data-number="9.10" class="anchored" data-anchor-id="радиотерапия"><span class="header-section-number">9.10</span> Радиотерапия</h2>
 <p>При радиотерапия се използва радиация за лечение на рак. Целта на радиотерапията е да унищожи раковите клетки, като се опитва да се намали въздействието върху здравите тъкани. В този пример разглеждаме задача, в която имаме 6 лъча радиация, които се прилагат върху 9 групи тъкани. Всяка група тъкани може да облъчена от два лъча радиация (ляво и горе). Тъканите се различават по това, какво количество радиация ще получат при единица интензивност на всеки лъч. Тази информация е представена в <a href="#tbl-radiation-therapy" class="quarto-xref">Таблица&nbsp;<span>9.10</span></a> (и в друг формат в <a href="#tbl-radiation-therapy-pd" class="quarto-xref">Таблица&nbsp;<span>9.11</span></a>), например при прилагане на една едицина интензивност при лъч 1, тъкан 1,1 ще получи 1 единица радиация, докато тъкан 1,2 ще получи 2 единици радиация.</p>
-<div id="tbl-radiation-therapy" class="quarto-float anchored">
+<div id="tbl-radiation-therapy" class="quarto-float quarto-figure quarto-figure-center anchored">
 <figure class="quarto-float quarto-float-tbl figure">
 <figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-tbl" id="tbl-radiation-therapy-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 Таблица&nbsp;9.10: Тъкани и погълната радиация при единица интензивност на лъчите
@@ -2492,7 +2492,7 @@ x_{Cо} = (60/2) x_{Cб} \\
 <span id="cb26-8"><a href="#cb26-8" aria-hidden="true" tabindex="-1"></a>}, index<span class="op">=</span>pd.MultiIndex.from_product([<span class="bu">range</span>(<span class="dv">1</span>, <span class="dv">4</span>), <span class="bu">range</span>(<span class="dv">4</span>, <span class="dv">7</span>)]))</span>
 <span id="cb26-9"><a href="#cb26-9" aria-hidden="true" tabindex="-1"></a>dt</span></code><button title="Копирай" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
-<div id="tbl-radiation-therapy-pd" class="cell quarto-float anchored" data-executetime="{&quot;end_time&quot;:&quot;2024-06-07T13:32:51.310789Z&quot;,&quot;start_time&quot;:&quot;2024-06-07T13:32:51.278039Z&quot;}" data-execution_count="22">
+<div id="tbl-radiation-therapy-pd" class="cell quarto-float quarto-figure quarto-figure-center anchored" data-execution_count="22" data-executetime="{&quot;end_time&quot;:&quot;2024-06-07T13:32:51.310789Z&quot;,&quot;start_time&quot;:&quot;2024-06-07T13:32:51.278039Z&quot;}">
 <figure class="quarto-float quarto-float-tbl figure">
 <figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-tbl" id="tbl-radiation-therapy-pd-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 Таблица&nbsp;9.11: Тъкани и погълната радиация при единица интензивност на лъчите (формат 2)
@@ -2872,18 +2872,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
     }
     return false;
   }
-  const clipboard = new window.ClipboardJS('.code-copy-button', {
-    text: function(trigger) {
-      const codeEl = trigger.previousElementSibling.cloneNode(true);
-      for (const childEl of codeEl.children) {
-        if (isCodeAnnotation(childEl)) {
-          childEl.remove();
-        }
-      }
-      return codeEl.innerText;
-    }
-  });
-  clipboard.on('success', function(e) {
+  const onCopySuccess = function(e) {
     // button target
     const button = e.trigger;
     // don't keep focus
@@ -2915,7 +2904,27 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
     }, 1000);
     // clear code selection
     e.clearSelection();
+  }
+  const getTextToCopy = function(trigger) {
+      const codeEl = trigger.previousElementSibling.cloneNode(true);
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+  }
+  const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+    text: getTextToCopy
   });
+  clipboard.on('success', onCopySuccess);
+  if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+    const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+      text: getTextToCopy,
+      container: window.document.getElementById('quarto-embedded-source-code-modal')
+    });
+    clipboardModal.on('success', onCopySuccess);
+  }
     var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
     var mailtoRegex = new RegExp(/^mailto:/);
       var filterRegex = new RegExp('/' + window.location.host + '/');
@@ -2923,7 +2932,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
         return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
     }
     // Inspect non-navigation links and adorn them if external
- 	var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool)');
+ 	var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
     for (var i=0; i<links.length; i++) {
       const link = links[i];
       if (!isInternal(link.href)) {
@@ -3020,7 +3029,6 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
       if (window.Quarto?.typesetMath) {
         window.Quarto.typesetMath(note);
       }
-      // TODO in 1.5, we should make sure this works without a callout special case
       if (note.classList.contains("callout")) {
         return note.outerHTML;
       } else {
