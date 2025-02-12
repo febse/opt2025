@@ -1,0 +1,5 @@
+
+# Литература {.unnumbered}
+
+1. @TAHA2017OperationsResearch
+2. @WILLIAMS2013ModelBuildingMathematical

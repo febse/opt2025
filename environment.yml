@@ -1,0 +1,20 @@
+name: opt2024
+channels:
+  - defaults
+  - gurobi
+dependencies:
+  - python=3.11
+  - pandas
+  - numpy
+  - scipy
+  - matplotlib
+  - seaborn
+  - networkx
+  - pip
+  - pydot
+  - graphviz
+  - ipykernel
+  - gurobi=11.0.0
+  - pip:
+    - polytope==0.2.4
+prefix: /home/amarov/anaconda3/envs/opt2024

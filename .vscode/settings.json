@@ -1,0 +1,90 @@
+{
+  // See https://go.microsoft.com/fwlink/?LinkId=827846 to learn about workspace recommendations.
+  // Extension identifier format: ${publisher}.${name}. Example: vscode.csharp
+
+  // List of extensions which should be recommended for users of this workspace.
+  
+  "[python]": {
+    "editor.defaultFormatter": "ms-python.autopep8",
+    "editor.formatOnSave": true,
+    "editor.codeActionsOnSave": {
+      "source.organizeImports": "explicit"
+    }
+  },
+    // List of extensions recommended by VS Code that should not be recommended for users of this workspace.
+  "unwantedRecommendations": [
+    // Add extensions you don't want to recommend here
+  ],
+  "remote.autoForwardPortsFallback": 0,
+  "PandocCiter.DefaultBibs": [   
+    "references.bib"
+],
+"cSpell.language": "en,bg",
+"cSpell.words": [
+  "Amarov",
+  "ANOVA",
+  "arabica",
+  "autopep",
+  "axline",
+  "boyko",
+  "Boyko",
+  "codespaces",
+  "debugpy",
+  "github",
+  "gurobipy",
+  "hosten",
+  "iloc",
+  "ipynb",
+  "jupyter",
+  "katex",
+  "Kursrepositories",
+  "Kursrepository",
+  "linestyle",
+  "Miniconda",
+  "Numpy",
+  "Regressionsmodell",
+  "robusta",
+  "textcoords",
+  "toolsai",
+  "vtype",
+  "xlabel",
+  "xlim",
+  "xytext",
+  "ylabel",
+  "ylim",
+  "Амаров",
+  "арабика",
+  "биномния",
+  "Бремен",
+  "Бутиково",
+  "двуфамилни",
+  "двуфамилните",
+  "Делукс",
+  "Дефицитност",
+  "Дуална",
+  "дуалната",
+  "Дуални",
+  "еднофамилни",
+  "екстериорна",
+  "интериорна",
+  "итерация",
+  "каноничен",
+  "каноничната",
+  "каноничния",
+  "Каноничният",
+  "максимизационната",
+  "минимизационна",
+  "небазисни",
+  "недефицитен",
+  "неотрицателна",
+  "неотрицателни",
+  "неотрицателност",
+  "Неотрицателността",
+  "пиковия",
+  "подходим",
+  "робуста",
+  "Симплекс",
+  "умлаути",
+  "флуктуациите"
+]
+}
