@@ -10,6 +10,7 @@ book:
   
   chapters:
     - index.qmd
+    - Literature.qmd
     # - part: 01-Python/index.qmd
     - 02-Introduction/index.ipynb
     # - 03-Graphical-Method/01-Blending.ipynb
@@ -34,7 +35,6 @@ book:
     # - 03-Simple-Linear-Model.qmd
     # - 04-Simple-ANOVA.qmd
     # - 05-Hypothesis-Testing-and-CI.qmd
-    - Literature.qmd
     # - izpit.qmd
     - references.qmd
 
