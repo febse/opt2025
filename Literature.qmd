@@ -1,5 +1,6 @@
-
 # Литература {.unnumbered}
 
-1. @TAHA2017OperationsResearch
-2. @WILLIAMS2013ModelBuildingMathematical
+1.  @CARTER2017OperationsResearchPractical: Operations Research: A Practical Introduction, Second Edition. 2nd ed. Advances in Applied Mathematics Ser. Milton: Chapman and Hall/CRC, 2017. 
+2.  @SINGLA2021OperationsResearchUsing: Operations Research Using Excel: A Case Study Approach. Milton: Taylor & Francis Group, 2021.
+3.  @WILLIAMS2013ModelBuildingMathematical: Model Building in Mathematical Programming. Fifth Edition. Chichester: John Wiley & Sons Ltd, 2013.
+4.  @IVANOV2018KolichestveniMetodiTeoriya: Количествени Методи: Теория и Приложения. трето издание. София: Авангард Прима, 2018.
