@@ -212,5 +212,6 @@ _quarto/
 
 /.quarto/
 _book/
+_site/
 lit/
 opt2025.zip
