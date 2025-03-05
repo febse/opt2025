@@ -46,5 +46,7 @@ format:
     html-math-method: katex
     code-fold: true
     code-summary: "Покажи"
+    execute:
+      enable: true
 
 editor: visual
