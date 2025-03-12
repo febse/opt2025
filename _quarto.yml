@@ -20,7 +20,7 @@ book:
     # - 05-Duals/01-Duals.ipynb
     # - 05-Duals/02-Sensitivity.ipynb
     # - 06-Transportation.ipynb
-    # - 00-Assignments/assignments.ipynb
+    - 00-Assignments/assignments.ipynb
     # - 00-Assignments/covid-facilities.ipynb
       # chapters:
       #   - 01-Python/01-01-Basics.ipynb
