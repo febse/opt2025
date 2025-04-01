@@ -1,7 +1,5 @@
 # Литература {.unnumbered}
 
-<https://tinyurl.com/2rcfc6u5>
-
 1.  @CARTER2017OperationsResearchPractical: Operations Research: A Practical Introduction, Second Edition. 2nd ed. Advances in Applied Mathematics Ser. Milton: Chapman and Hall/CRC, 2017.
 
 2.  @SINGLA2021OperationsResearchUsing: Operations Research Using Excel: A Case Study Approach. Milton: Taylor & Francis Group, 2021.
