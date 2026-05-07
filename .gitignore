@@ -224,7 +224,7 @@ exams/
 **/*.quarto_ipynb
 
 # Excel lock files
-~$*.xlsx
+.~*
 
 grades/
 
